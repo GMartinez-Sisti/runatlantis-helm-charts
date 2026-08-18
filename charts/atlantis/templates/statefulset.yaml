@@ -185,7 +185,7 @@ spec:
       {{- if or .Values.initContainers .Values.initConfig.enabled }}
       initContainers:
         {{- with .Values.initContainers }}
-        {{- toYaml . | nindent 8 }}
+        {{- include "atlantis.tplvalues.render" (dict "value" . "context" $) | nindent 8 }}
         {{- end }}
         {{- if .Values.initConfig.enabled }}
         - name: init-config

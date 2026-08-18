@@ -1223,6 +1223,30 @@ tests:
                   - /bin/sh
                   - -c
                   - while pgrep -x "terraform|tofu|terragrunt" > /dev/null; do sleep 1; done
+  - it: initContainers rendered from a template string
+    template: statefulset.yaml
+    set:
+      initContainers: |
+        - name: init-{{ .Release.Name }}
+          image: busybox:latest
+          restartPolicy: Always
+    asserts:
+      - equal:
+          path: spec.template.spec.initContainers[0].name
+          value: init-my-release
+      - equal:
+          path: spec.template.spec.initContainers[0].restartPolicy
+          value: Always
+  - it: initContainers still accepts a plain list (backward compatible)
+    template: statefulset.yaml
+    set:
+      initContainers:
+        - name: plain-init
+          image: busybox:latest
+    asserts:
+      - equal:
+          path: spec.template.spec.initContainers[0].name
+          value: plain-init
   - it: extraContainers rendered from a template string
     template: statefulset.yaml
     set:

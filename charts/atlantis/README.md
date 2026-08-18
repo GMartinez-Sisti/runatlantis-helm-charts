@@ -316,7 +316,7 @@ Then point the browser-facing Ingress host at the `atlantis-ui` service port (`8
 | initConfig.sharedDirReadOnly | bool | `true` |  |
 | initConfig.sizeLimit | string | `"300Mi"` | Size for the shared volume. |
 | initConfig.workDir | string | `"/tmp"` |  |
-| initContainers | list | `[]` | Optionally specify init containers manifests to be added to the Atlantis pod. Check values.yaml for examples. |
+| initContainers | list | `[]` | Optionally specify init containers manifests to be added to the Atlantis pod. Check values.yaml for examples. May be a list, or a string with Go template directives that renders to a list (evaluated via tpl). |
 | lifecycle | object | `{}` | Set lifecycle hooks. https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/. |
 | livenessProbe.enabled | bool | `true` |  |
 | livenessProbe.failureThreshold | int | `5` |  |

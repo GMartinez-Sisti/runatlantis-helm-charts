@@ -639,7 +639,8 @@ extraManifests: []
 #        name: "gcp-cloud-armor-policy-test"
 
 # -- Optionally specify init containers manifests to be added to the Atlantis pod.
-# Check values.yaml for examples.
+# Check values.yaml for examples. May be a list, or a string with Go template
+# directives that renders to a list (evaluated via tpl).
 initContainers: []
 # initContainers:
 # - name: example
